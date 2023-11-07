@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Guessblast from './components/Guessblast';
 
 
 
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <h1>GuessBlast</h1>
-      {sol && <div>Solution: {sol} </div>}
+      {sol && <Guessblast sol={sol} />}
     </div>
   );
 }
