@@ -3,7 +3,7 @@ import useGuessblast from '../hooks/useGuessblast'
 
 export default function Guessblast({ sol }) {
 
-    const { currentGuess, handleKeyup} = useGuessblast(sol);
+    const { currentGuess, handleKeyup, guess, isCorrect, turn } = useGuessblast(sol);
 
 
     useEffect(() => {
@@ -11,9 +11,16 @@ export default function Guessblast({ sol }) {
 
         return () => window.removeEventListener('keyup', handleKeyup)
     }, [handleKeyup])
+
+    useEffect(() => {
+        console.log(guess, isCorrect, turn);
+    }, [guess, isCorrect, turn])
     
 
     return (
-        <div>currentguess - {currentGuess}</div>
+        <div>
+            <div>currentguess - {currentGuess}</div>
+            <div>Solution - {sol}</div>
+        </div>
     )
 }

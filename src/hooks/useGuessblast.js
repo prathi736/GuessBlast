@@ -6,7 +6,7 @@ const useGuessblast = (sol) => {
 
     const [turn, setTurn] = useState(0)
     const [currentGuess, setCurrentGuess] = useState('')
-    const [guess, setGuess] = useState([]) // each guess is an array
+    const [guess, setGuess] = useState([...Array(6)]) // each guess is an array
     const [history, setHistory] = useState([]) // each guess is a string
     const [isCorrect, setIsCorrect] = useState(false)
 
@@ -16,15 +16,54 @@ const useGuessblast = (sol) => {
     // format a guess into a array of letter objects
     // e.g. [{ key: 'a', color: 'red' }]
     const formatGuess = () => {
-        console.log("formating the guess - ", currentGuess);
+        let solArray = [...sol]
+        let formattedGuess = [...currentGuess].map((l) => {
+            return {key: l, color: 'red'}
+        })
+
+        // find green letters
+        formattedGuess.forEach((l,i) => {
+            if (solArray[i] === l.key) {
+                formattedGuess[i].color = 'green'
+                solArray[i] = null
+            }
+        })
+
+
+        // find yellow letters
+        formattedGuess.forEach((l,i) => {
+            if (solArray.includes(l.key ) && l.color !== 'green') {
+                formattedGuess[i].color = 'yellow'
+                solArray[solArray.indexOf(l.key)] = null
+            }
+        })
+
+        return formattedGuess
     }
 
 
     // add a new guess to the guesses state
     // update the isCorrect state if the guess is correct
     // add one to the turn state
-    const addNewGuess = () => {
+    const addNewGuess = (formattedGuess) => {
+        if (currentGuess === sol) {
+            setIsCorrect(true)
+        }
+        setGuess((prevGuess) => {
+            let newGuess = [...prevGuess]
+            newGuess[turn] = formattedGuess
+            return newGuess
+        })
 
+
+        setHistory((prevHistory) => {
+            return [...prevHistory, currentGuess]
+        })
+        setTurn((prevTurn) => {
+            return prevTurn + 1
+        })
+
+        setCurrentGuess('')
     }
 
 
@@ -49,13 +88,12 @@ const useGuessblast = (sol) => {
                 console.log('word must be 5 chars.')
                 return
             }
-            formatGuess()
+            const formatted = formatGuess()
+            addNewGuess(formatted)
 
-            // Update history
-            setHistory((prevHistory) => [...prevHistory, currentGuess]);
+            // setHistory((prevHistory) => [...prevHistory, currentGuess]);
 
-            // Increment turn
-            setTurn((prevTurn) => prevTurn + 1);
+            // setTurn((prevTurn) => prevTurn + 1);
         }
 
         if (key === 'Backspace') {
