@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import useGuessblast from '../hooks/useGuessblast'
+import Grid from './Grid';
 
 export default function Guessblast({ sol }) {
 
@@ -21,6 +22,7 @@ export default function Guessblast({ sol }) {
         <div>
             <div>currentguess - {currentGuess}</div>
             <div>Solution - {sol}</div>
+            <Grid currGuess={currentGuess} guess={guess} turn={turn} />
         </div>
     )
 }
