@@ -22,7 +22,7 @@ export default function Guessblast({ sol }) {
         <div>
             <div>currentguess - {currentGuess}</div>
             <div>Solution - {sol}</div>
-            <Grid currGuess={currentGuess} guess={guess} turn={turn} />
+            <Grid currentGuess={currentGuess} guess={guess} turn={turn} />
         </div>
     )
 }
