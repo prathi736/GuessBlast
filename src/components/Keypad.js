@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function Keypad() {
+export default function Keypad({ usedKeys }) {
 
     const [letter, setLetter] = useState(null)
 
@@ -20,8 +20,9 @@ export default function Keypad() {
     return (
         <div className='keypad'>
             { letter && letter.map((l) => {
+                const color = usedKeys[l.key]
                 return (
-                    <div key={l.key}>{l.key}</div>
+                    <div key={l.key} className={color}>{l.key}</div>
                 )
             })}
         </div>

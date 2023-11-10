@@ -5,26 +5,31 @@ import Keypad from './Keypad';
 
 export default function Guessblast({ sol }) {
 
-    const { currentGuess, handleKeyup, guess, isCorrect, turn } = useGuessblast(sol);
+    const { currentGuess, handleKeyup, guess, isCorrect, turn, usedKeys } = useGuessblast(sol);
 
 
     useEffect(() => {
         window.addEventListener('keyup', handleKeyup)
 
-        return () => window.removeEventListener('keyup', handleKeyup)
-    }, [handleKeyup])
+        if (isCorrect) {
+            console.log('congrats, you win');
+            window.removeEventListener('keyup', handleKeyup)
+        }
 
-    useEffect(() => {
-        console.log(guess, isCorrect, turn);
-    }, [guess, isCorrect, turn])
-    
+        if (turn > 5) {
+            console.log('oops all turns are complete');
+            window.removeEventListener('keyup', handleKeyup)
+        }
+
+        return () => window.removeEventListener('keyup', handleKeyup)
+    }, [handleKeyup, isCorrect, turn])
 
     return (
         <div>
             <div>currentguess - {currentGuess}</div>
             <div>Solution - {sol}</div>
             <Grid currentGuess={currentGuess} guess={guess} turn={turn} />
-            <Keypad />
+            <Keypad usedKeys={usedKeys} />
         </div>
     )
 }

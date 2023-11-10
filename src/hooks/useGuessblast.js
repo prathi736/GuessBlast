@@ -9,7 +9,7 @@ const useGuessblast = (sol) => {
     const [guess, setGuess] = useState([...Array(6)]) // each guess is an array
     const [history, setHistory] = useState([]) // each guess is a string
     const [isCorrect, setIsCorrect] = useState(false)
-
+    const [usedKeys, setUsedKeys] = useState({}) // {a:'green', b:'yellow'}
 
 
 
@@ -63,6 +63,28 @@ const useGuessblast = (sol) => {
             return prevTurn + 1
         })
 
+        setUsedKeys((prevUsedKeys) => {
+            let newKeys = {...prevUsedKeys}
+
+            formattedGuess.forEach((l) => {
+                const currentColor = newKeys[l.key]
+
+                if (l.color === 'green') {
+                    newKeys[l.key] = 'green'
+                    return
+                }
+                if (l.color === 'yellow' && currentColor !== 'green') {
+                    newKeys[l.key] = 'yellow'
+                    return
+                }
+                if (l.color === 'red' && currentColor !== ('green' || 'yellow')) {
+                    newKeys[l.key] = 'red'
+                    return
+                }
+            })
+            return newKeys
+        })
+
         setCurrentGuess('')
     }
 
@@ -112,7 +134,7 @@ const useGuessblast = (sol) => {
         }
     }
 
-    return { turn, currentGuess, guess, isCorrect, handleKeyup }
+    return { turn, currentGuess, guess, isCorrect, usedKeys, handleKeyup }
 }
 
 export default useGuessblast;
