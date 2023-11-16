@@ -35,6 +35,7 @@ export default function Guessblast({ sol }) {
 
     return (
         <div>
+            {/* remove first to div tags after complete implementataion */}
             <div>currentguess - {currentGuess}</div>
             <div>Solution - {sol}</div>
             <Grid currentGuess={currentGuess} guess={guess} turn={turn} />

@@ -1,12 +1,16 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Guessblast from './components/Guessblast';
-
+import { Toggle } from './components/Toggle';
+import useLocalStorage from 'use-local-storage';
 
 
 function App() {
 
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
   const [sol, setSol] = useState(null);
+  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
 
 
   useEffect(() => {
@@ -23,7 +27,11 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="App" data-theme={isDark ? "dark" : "light"}>
+      <Toggle
+        isChecked={isDark}
+        handleChange={() => setIsDark(!isDark)}
+      />
       <h1>GuessBlast</h1>
       {sol && <Guessblast sol={sol} />}
     </div>
