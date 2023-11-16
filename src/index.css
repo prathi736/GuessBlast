@@ -1,9 +1,9 @@
-body {
+* {
+  background-color: var(--background-color);
   text-align: center;
   font-size: 1em;
   font-family: "Roboto Mono", monospace;
   margin: 0;
-  background-color: var(--background-color);
 }
 
 :root {
@@ -39,7 +39,7 @@ h1 {
   text-align: center;
   display: flex;
   justify-content: center;
-  /* color: #ffffff; */
+  color: var(--text-color);
 }
 
 .row > div {

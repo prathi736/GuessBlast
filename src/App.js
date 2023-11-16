@@ -25,7 +25,6 @@ function App() {
       })
   }, [setSol])
 
-
   return (
     <div className="App" data-theme={isDark ? "dark" : "light"}>
       <Toggle
