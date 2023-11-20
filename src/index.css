@@ -14,6 +14,7 @@
   --h1-brd: #b5b3b3;
   --row-brd: #7d7d7d;
   --keypad-bkg: #D9D9D9;
+  --button-bg: #0059ff;
 }
 
 [data-theme="dark"] {
@@ -24,6 +25,7 @@
   --h1-brd: #f7f7f7;
   --row-brd: #3A3A3C;
   --keypad-bkg: #818384;
+  --button-bg: #35B7FF;
 }
 
 h1 {
@@ -151,6 +153,16 @@ h1 {
 .modal :is(h1, p) {
   background-color: var(--bkg-color);
   color: var(--text-color);
+}
+
+.modal button {
+  margin-top: 20px;
+  font-size: 18px;
+  background-color: var(--button-bg);
+  color: #fff;
+  border-radius: 50px;
+  border: 1px solid var(--button-bg);
+  cursor: pointer;
 }
 
 .modal .solution {
