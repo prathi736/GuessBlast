@@ -7,7 +7,8 @@ export default function Modal({ isCorrect, turn, sol}) {
     const closeModal = () => {
         setModal(false);
         // reloads the current document
-        window.location.reload();
+        // window.location.reload();
+        setTimeout(() => window.location.reload(), 100);
     };
 
     return (

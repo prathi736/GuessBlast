@@ -2,8 +2,10 @@
   text-align: center;
   font-size: 1em;
   font-family: "Roboto Mono", monospace;
-  margin: 0;
+  margin: 0px;
+  padding: 0px;
   background-color: var(--bkg-color);
+  background-size: 100% 100%;
 }
 
 :root {
@@ -111,6 +113,7 @@ h1 {
   text-transform: capitalize;
   border-radius: 6px;
   line-height: 50px;
+  cursor: pointer;
 }
 
 .keypad > div.green {
@@ -156,11 +159,12 @@ h1 {
 }
 
 .modal button {
-  margin-top: 20px;
-  font-size: 18px;
+  margin-top: 1.25em;
+  font-size: 1.125em;
+  padding: 0.35em;
   background-color: var(--button-bg);
   color: #fff;
-  border-radius: 50px;
+  border-radius: 20em;
   border: 1px solid var(--button-bg);
   cursor: pointer;
 }
